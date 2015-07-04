@@ -1,0 +1,22 @@
+{
+    "version": "1.5.0-alpha",
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false
+    },
+    "filesGlob": [
+        "./**/*.ts",
+        "!./node_modules/**/*.ts"
+    ],
+    "files": [
+        "./createjs-lib/createjs-lib.d.ts",
+        "./easeljs/easeljs.d.ts",
+        "./form_collage.ts",
+        "./preloadjs/preloadjs.d.ts",
+        "./tweenjs/tweenjs.d.ts"
+    ]
+}
