@@ -130,9 +130,9 @@ function evt_pressmove(oCEvt)
     {
         if(Math.abs(posAdjust.y) < 32)
         {
-
             posCalc.x -= posAdjust.x;
             posCalc.y -= posAdjust.y;
+            //console.log(oCNode.m_oCItem.hitArea.src);
         }
     }
 
