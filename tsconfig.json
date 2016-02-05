@@ -1,22 +1,21 @@
 {
-    "version": "1.5.0-alpha",
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
-        "declaration": false,
-        "noImplicitAny": false,
+        "noImplicitAny": true,
         "removeComments": true,
-        "noLib": false
+        "preserveConstEnums": true,
+        "outDir": "./www",
+        "sourceMap": true
     },
     "filesGlob": [
         "./**/*.ts",
         "!./node_modules/**/*.ts"
     ],
     "files": [
-        "./createjs-lib/createjs-lib.d.ts",
-        "./easeljs/easeljs.d.ts",
-        "./form_collage.ts",
-        "./preloadjs/preloadjs.d.ts",
-        "./tweenjs/tweenjs.d.ts"
+        "./DefinitelyTyped/hogan/hogan.d.ts",
+        "./DefinitelyTyped/jquery/jquery.d.ts",
+        "./DefinitelyTyped/pixijs/pixijs.d.ts",
+        "./form_collage.ts"
     ]
 }
