@@ -6,7 +6,7 @@
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Nanoha History" />
+        <meta name="description" content="form:Collage" />
         <meta name="author" content="MizunagiKB" />
 
         <title id="id_title">form:Collage</title>
@@ -31,7 +31,8 @@
     <body>
 
         <div class="text-center">
-            <canvas id="main_surface"></canvas>
+            <div id="main_frame">
+            </div>
         </div>
 
         <div id="id_tpl_foot">
@@ -39,6 +40,19 @@
                 <div class="page-header">
                     <h1>form:Collage <small id="resource_name"></small></h1>
                 </div>
+
+				<p>
+	                <a class="btn btn-default" href="?asset=asset/vivio/model.json">Vivio</a>
+	                <a class="btn btn-default" href="?asset=asset/einhald/model.json">Einhald</a>
+
+	                <button id="id_btn_save_screenshot" class="btn btn-primary" href="#">Save Screenshot[TEST]</button>
+				</p>
+
+				<div class="alert alert-info alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<strong>注意</strong> WebGLを使用しているため、古いiPadやAndroidでは動作しない場合があります。
+				</div>
+
                 <p class="text-right">Programming&nbsp;<a href="https://twitter.com/MizunagiKB">@MizunagiKB</a></p>
                 <p class="text-right">
                     <!-- Place this tag where you want the button to render. -->
@@ -53,13 +67,54 @@
 
         <script type="text/javascript">
 
-            // ---------------------------------------------------- Global Object(s)
-            // =====================================================================
+            // ---------------------------------------------- Global Object(s)
+            var GLOBAL = new Object();
+            GLOBAL.STATS = null;
+
+            // ===============================================================
+            /*!
+             */
+            function init_stats()
+            {
+                GLOBAL.STATS = new Stats();
+                GLOBAL.STATS.setMode(1); // 0: fps, 1: ms, 2: mb
+
+                // align top-left
+                GLOBAL.STATS.domElement.style.position = "absolute";
+                GLOBAL.STATS.domElement.style.left = "0px";
+                GLOBAL.STATS.domElement.style.top = "0px";
+                GLOBAL.STATS.domElement.style.visibility = "hidden";
+
+                document.body.appendChild(GLOBAL.STATS.domElement);
+
+                var update = function()
+                {
+                    GLOBAL.STATS.begin();
+
+                    form_collage.CMainFrame.INSTANCE.render();
+
+                    GLOBAL.STATS.end();
+
+                    requestAnimationFrame(update);
+                };
+
+                requestAnimationFrame(update);
+            }
+
+            // ===============================================================
             /*!
              */
             window.onload = function()
             {
-                main();
+                form_collage.create_instance("main_frame");
+                init_stats();
+
+                $("#id_btn_save_screenshot").click(
+                    function()
+                    {
+                        form_collage.save_screenshot();
+                    }
+                );
             }
 
         </script>
@@ -73,11 +128,13 @@
         <!-- Hogan.js http://twitter.github.io/hogan.js/ -->
         <script src="http://twitter.github.com/hogan.js/builds/3.0.1/hogan-3.0.1.js"></script>
 
-        <!-- CreateJS http://createjs.com/ -->
-        <script src="https://code.createjs.com/easeljs-0.8.1.min.js"></script>
-        <script src="https://code.createjs.com/preloadjs-0.6.1.min.js"></script>
+        <!-- pixi.js http://www.pixijs.com/ -->
+        <script src="./lib/pixi.min.js"></script>
 
-        <script src="form_collage.js"></script>
+        <!-- https://github.com/mrdoob/stats.js -->
+        <script src="./lib/stats.min.js"></script>
+
+        <script src="./src/form_collage.js"></script>
 
         <!-- Place this tag right after the last button or just before your close body tag. -->
         <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
